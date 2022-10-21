@@ -2,12 +2,17 @@ const express=require("express");
 const cors=require("cors");
 const app=express();//creating instance for express.js package
 const port=3000;
+const mongoDB=require("./mongoTEST.js");//importing mongoTEST.js and cann access functions in it
 app.use(express.json());//specifies that API endpoint output is the json object
 app.use(cors({origin:"*"}));//* accepts all the urls from any browser, doesnt show cors origin error
 
 app.get('/api/getPersonalDetails',(req,res)=>{
     res.json(getPersonalDetails());
 });//when we call get endpoint we try to create a response object
+
+app.get('/api/insertDocument',(req,res)=>{
+    res.json(mongoDB.insertDocument());
+});
 
 app.post('/api/getStudentDetails',(req,res)=>{
     res.json(getStudentDetails(req.body.name));//req.body is 
